@@ -1,6 +1,7 @@
 package br.com.samples.samplemockito.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Job {
@@ -11,6 +12,8 @@ public class Job {
     public Job( String mName, String description ) {
         this.mName = mName;
         this.mDescription = description;
+
+        this.mEmployers = new ArrayList<>();
     }
 
     public String getName() {
@@ -37,8 +40,17 @@ public class Job {
         this.mEmployers = employers;
     }
 
-    public void addEmployer( Employer employer ) {
+    public boolean hireEmployer( Employer employer ) {
+        int qtdBeforeHire = countEmployers();
+
+        employer.setJob( this );
+
         this.mEmployers.add( employer );
+
+        int qtdAfterHire = countEmployers();
+
+        return qtdBeforeHire != qtdAfterHire;
+
     }
 
     public void dismissEmployer( Employer employer ) {
@@ -47,5 +59,18 @@ public class Job {
 
     public int countEmployers() {
         return this.mEmployers.size();
+    }
+
+    public String listAllEmployers() {
+        StringBuilder builder = new StringBuilder( "Employers:{" );
+
+        for( Employer employer : mEmployers ) {
+            builder.append( "[name( " + employer.getName() + " ); " );
+            builder.append( "age( " + employer.getAge() + " )];" );
+        }
+
+        builder.append( "}" );
+
+        return builder.toString();
     }
 }

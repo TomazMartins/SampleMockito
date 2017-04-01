@@ -5,6 +5,7 @@ public class Employer {
     private String mName;
     private int mAge;
     private Job mJob;
+    private Address mAddress;
 
     public Employer( String mName, int age ) {
         this.mName = mName;
@@ -33,6 +34,14 @@ public class Employer {
 
     public void setJob( Job job ) {
         this.mJob = job;
+    }
+
+    public Address getAddress() {
+        return mAddress;
+    }
+
+    public void setAddress( Address address ) {
+        this.mAddress = address;
     }
 
     public String toString() {
